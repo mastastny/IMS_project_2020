@@ -80,6 +80,18 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/Stats.cpp">
+			<Option target="IMS_project_2020"/>
+		</Unit>
+		<Unit filename="/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/Stats.h">
+			<Option target="IMS_project_2020"/>
+		</Unit>
+		<Unit filename="/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/Tank.cpp">
+			<Option target="IMS_project_2020"/>
+		</Unit>
+		<Unit filename="/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/Tank.h">
+			<Option target="IMS_project_2020"/>
+		</Unit>
 		<Unit filename="/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/ims.cpp">
 			<Option target="IMS_project_2020"/>
 		</Unit>

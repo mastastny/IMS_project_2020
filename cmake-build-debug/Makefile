@@ -123,6 +123,60 @@ IMS_project_2020/fast:
 	$(MAKE) -f CMakeFiles/IMS_project_2020.dir/build.make CMakeFiles/IMS_project_2020.dir/build
 .PHONY : IMS_project_2020/fast
 
+Stats.o: Stats.cpp.o
+
+.PHONY : Stats.o
+
+# target to build an object file
+Stats.cpp.o:
+	$(MAKE) -f CMakeFiles/IMS_project_2020.dir/build.make CMakeFiles/IMS_project_2020.dir/Stats.cpp.o
+.PHONY : Stats.cpp.o
+
+Stats.i: Stats.cpp.i
+
+.PHONY : Stats.i
+
+# target to preprocess a source file
+Stats.cpp.i:
+	$(MAKE) -f CMakeFiles/IMS_project_2020.dir/build.make CMakeFiles/IMS_project_2020.dir/Stats.cpp.i
+.PHONY : Stats.cpp.i
+
+Stats.s: Stats.cpp.s
+
+.PHONY : Stats.s
+
+# target to generate assembly for a file
+Stats.cpp.s:
+	$(MAKE) -f CMakeFiles/IMS_project_2020.dir/build.make CMakeFiles/IMS_project_2020.dir/Stats.cpp.s
+.PHONY : Stats.cpp.s
+
+Tank.o: Tank.cpp.o
+
+.PHONY : Tank.o
+
+# target to build an object file
+Tank.cpp.o:
+	$(MAKE) -f CMakeFiles/IMS_project_2020.dir/build.make CMakeFiles/IMS_project_2020.dir/Tank.cpp.o
+.PHONY : Tank.cpp.o
+
+Tank.i: Tank.cpp.i
+
+.PHONY : Tank.i
+
+# target to preprocess a source file
+Tank.cpp.i:
+	$(MAKE) -f CMakeFiles/IMS_project_2020.dir/build.make CMakeFiles/IMS_project_2020.dir/Tank.cpp.i
+.PHONY : Tank.cpp.i
+
+Tank.s: Tank.cpp.s
+
+.PHONY : Tank.s
+
+# target to generate assembly for a file
+Tank.cpp.s:
+	$(MAKE) -f CMakeFiles/IMS_project_2020.dir/build.make CMakeFiles/IMS_project_2020.dir/Tank.cpp.s
+.PHONY : Tank.cpp.s
+
 ims.o: ims.cpp.o
 
 .PHONY : ims.o
@@ -159,6 +213,12 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... IMS_project_2020"
+	@echo "... Stats.o"
+	@echo "... Stats.i"
+	@echo "... Stats.s"
+	@echo "... Tank.o"
+	@echo "... Tank.i"
+	@echo "... Tank.s"
 	@echo "... ims.o"
 	@echo "... ims.i"
 	@echo "... ims.s"

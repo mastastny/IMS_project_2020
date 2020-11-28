@@ -1,0 +1,20 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/Tank.h
+
+/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/ims.cpp
+Tank.h
+/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/Tank.h
+iostream
+-
+getopt.h
+-
+fstream
+-
+

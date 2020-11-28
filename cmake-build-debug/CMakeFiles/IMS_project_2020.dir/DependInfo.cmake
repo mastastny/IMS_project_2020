@@ -4,6 +4,8 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
+  "/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/Stats.cpp" "/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/cmake-build-debug/CMakeFiles/IMS_project_2020.dir/Stats.cpp.o"
+  "/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/Tank.cpp" "/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/cmake-build-debug/CMakeFiles/IMS_project_2020.dir/Tank.cpp.o"
   "/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/ims.cpp" "/Users/michaelkinc/Desktop/FIT/4BIT/IMS_project_2020/cmake-build-debug/CMakeFiles/IMS_project_2020.dir/ims.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "AppleClang")

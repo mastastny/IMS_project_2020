@@ -1,4 +1,6 @@
 file(REMOVE_RECURSE
+  "CMakeFiles/IMS_project_2020.dir/Stats.cpp.o"
+  "CMakeFiles/IMS_project_2020.dir/Tank.cpp.o"
   "CMakeFiles/IMS_project_2020.dir/ims.cpp.o"
   "IMS_project_2020"
   "IMS_project_2020.pdb"
