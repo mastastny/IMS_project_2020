@@ -12,9 +12,17 @@ Tank* Tank::instance = nullptr;
  */
 
 
-Tank* Tank::getInstance(int *const capacity) {
+Tank* Tank::getInstance(int capacity) {
     if (instance == nullptr) {
         instance = new Tank(capacity);
+    }
+    return instance;
+}
+
+Tank* Tank::getInstance() {
+    if (instance == nullptr) {
+        cerr << "[CHYBA] Nadrz nema nastavenou maximalni kapacitu." << endl;
+        exit(1);
     }
     return instance;
 }
@@ -24,15 +32,9 @@ Tank* Tank::getInstance(int *const capacity) {
  * @param capacity maximalni kapacita akumulacni nadrze
  */
 
-Tank::Tank(int* const capacity) {
-    if (capacity != nullptr) {
-        maxCapacity = *capacity;
-    }
-    else {
-        cerr << "[CHYBA] Nadrz nema nastavenou maximalni kapacitu." << endl;
-        exit(1);
-    }
-    waterLevel = 0.0;
+Tank::Tank(int capacity) {
+    maxCapacity = capacity;
+    waterLevel = 0;
 }
 
 /**
@@ -40,7 +42,7 @@ Tank::Tank(int* const capacity) {
  * @return aktualni zaplneni
  */
 
-double Tank::getWaterLevel() {
+int Tank::getWaterLevel() {
     return waterLevel;
 }
 
@@ -49,7 +51,7 @@ double Tank::getWaterLevel() {
  * @return maximalni mozne zaplneni
  */
 
-double Tank::getMaxCapacity() {
+int Tank::getMaxCapacity() {
     return maxCapacity;
 }
 

@@ -13,13 +13,13 @@ using namespace std;
 class Tank {
     public:
         void fill(int amount);
-        double getWaterLevel();
-        double getMaxCapacity();
-        static Tank* getInstance(int* const capacity = nullptr);
+        int getWaterLevel();
+        int getMaxCapacity();
+        static Tank* getInstance(int capacity);
+        static Tank* getInstance();
         void drainWater(int amount);
     private:
-        Tank();
-        Tank(int* const capacity);
+        Tank(int capacity);
         static Tank* instance;
         int waterLevel;
         int maxCapacity;
