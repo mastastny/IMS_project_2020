@@ -7,22 +7,24 @@
 
 #include <string>
 #include "Stats.h"
+#include "WaterSupply.h"
 using namespace std;
 
 class Tank {
     public:
-        void fill(double amount);
+        void fill(int amount);
         double getWaterLevel();
         double getMaxCapacity();
-        static Tank* getInstance(double* const capacity = nullptr);
+        static Tank* getInstance(int* const capacity = nullptr);
+        void drainWater(int amount);
     private:
         Tank();
-        Tank(double* const capacity);
+        Tank(int* const capacity);
         static Tank* instance;
-        double waterLevel;
-        double maxCapacity;
+        int waterLevel;
+        int maxCapacity;
         bool isTankOverfull();
-        void dropWater(double amount);
+        void dropWater(int amount);
 };
 
 #endif //IMS_PROJECT_2020_TANK_H

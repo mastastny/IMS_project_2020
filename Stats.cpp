@@ -4,10 +4,14 @@
 
 #include "Stats.h"
 
+Stats::Stats() = default;
+
 /**
  * Staticky atribut tridy Stats, ktery reprezentuje mnozstvi vody vypustene do kanalu z jimky.
  */
-double Stats::droppedWater = 0.0;
+int Stats::droppedWater = 0;
+
+int Stats::waterSupply = 0;
 
 /**
  * Vypise na standardni vystup zachycene statistiky.
@@ -15,5 +19,3 @@ double Stats::droppedWater = 0.0;
 void Stats::generateStats() {
     cout << "Prepad vody za rok [m3]: " << droppedWater << endl;
 }
-
-Stats::Stats() = default;

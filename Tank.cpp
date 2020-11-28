@@ -12,7 +12,7 @@ Tank* Tank::instance = nullptr;
  */
 
 
-Tank* Tank::getInstance(double *const capacity) {
+Tank* Tank::getInstance(int *const capacity) {
     if (instance == nullptr) {
         instance = new Tank(capacity);
     }
@@ -24,7 +24,7 @@ Tank* Tank::getInstance(double *const capacity) {
  * @param capacity maximalni kapacita akumulacni nadrze
  */
 
-Tank::Tank(double* const capacity) {
+Tank::Tank(int* const capacity) {
     if (capacity != nullptr) {
         maxCapacity = *capacity;
     }
@@ -58,7 +58,7 @@ double Tank::getMaxCapacity() {
  * @param amount mnozstvi vody, ktera se vypusti do kanalizace
  */
 
-void Tank::dropWater(double amount) {
+void Tank::dropWater(int amount) {
     Stats::droppedWater += amount;
     waterLevel = maxCapacity;
 }
@@ -68,7 +68,7 @@ void Tank::dropWater(double amount) {
  * @param amount mnozstvi vody
  */
 
-void Tank::fill(double amount) {
+void Tank::fill(int amount) {
     waterLevel += amount;
     if (isTankOverfull()) {
         dropWater(waterLevel - maxCapacity);
@@ -82,4 +82,18 @@ void Tank::fill(double amount) {
 
 bool Tank::isTankOverfull() {
     return waterLevel > maxCapacity;
+}
+
+void Tank::drainWater(int amount) {
+    if (amount > maxCapacity) {
+        cout << "Nadrz s kapacitou " << maxCapacity << " litrů není vhodná pro vase potreby zavlazovani." << endl;
+        exit(0);
+    }
+    if (waterLevel >= amount) {
+        waterLevel -= amount;
+    }
+    else {
+        WaterSupply::getWater(amount - waterLevel);
+        waterLevel = 0;
+    }
 }

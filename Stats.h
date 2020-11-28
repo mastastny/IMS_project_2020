@@ -11,7 +11,8 @@ using namespace std;
 class Stats {
     public:
         Stats();
-        static double droppedWater;
+        static int droppedWater;
+        static int waterSupply;
         static void generateStats();
 };
 
