@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="SshConfigs">
-    <configs>
-      <sshConfig authType="PASSWORD" host="eva.fit.vutbr.cz" id="f0182840-e8d0-499d-be46-a2fdf7ee8b84" port="22" nameFormat="DESCRIPTIVE" username="xkincm02" />
-    </configs>
-  </component>
-</project>

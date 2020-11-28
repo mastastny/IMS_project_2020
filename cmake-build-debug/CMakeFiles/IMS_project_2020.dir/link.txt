@@ -1,1 +1,0 @@
-/Library/Developer/CommandLineTools/usr/bin/c++  -g -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX10.15.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/IMS_project_2020.dir/ims.cpp.o CMakeFiles/IMS_project_2020.dir/Tank.cpp.o CMakeFiles/IMS_project_2020.dir/Stats.cpp.o  -o IMS_project_2020 
