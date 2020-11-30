@@ -11,6 +11,7 @@ using namespace std;
 vector<shared_ptr<Roof>> roofs;
 shared_ptr<Weather> weather;
 shared_ptr<Irrigation> sprinkler;
+shared_ptr<Tank> tank;
 
 vector<string> split(string myStr, string delimiter);
 void parseArguments(int argc, char** argv);
@@ -18,7 +19,6 @@ void parseArguments(int argc, char** argv);
 int main(int argc, char** argv) {
 
     parseArguments(argc, argv);
-    auto tank = make_shared<Tank>(5000);
 
     /*
      * Kalendar zavlazovani (4X TYDNE, 1 DAVKA = 5MM):
@@ -61,6 +61,11 @@ void parseArguments(int argc, char** argv) {
     char* param;
     vector<string> parsedParam;
 
+    if (argc != 9) {
+        cerr << "[CHYBA] Nektery z argumentu neni zadan." << "\n" << "Spusteni: ./ims -r <plocha_strechy>:<koeficient> -g <plocha_zahrady> -t <objem_nadrze> -f <nazev_souboru_s_pocasim>" << endl;
+        exit(1);
+    }
+
     while ((c = getopt (argc, argv, "r:g:t:f:")) != -1)
         switch (c)
         {
@@ -79,6 +84,7 @@ void parseArguments(int argc, char** argv) {
                 break;
             case 't':
                 param = optarg;
+                tank = make_shared<Tank>(stoi(param));
                 break;
             case 'f': {
                 param = optarg;
