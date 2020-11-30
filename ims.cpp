@@ -67,8 +67,7 @@ void parseArguments(int argc, char** argv) {
     }
 
     while ((c = getopt (argc, argv, "r:g:t:f:")) != -1)
-        switch (c)
-        {
+        switch (c) {
             case 'r': {
                 param = optarg;
                 parsedParam = split(param, ":");
