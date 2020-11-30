@@ -5,28 +5,34 @@
 #include "Irrigation.h"
 
 void Irrigation::irrigate(shared_ptr<Weather> weather, shared_ptr<Tank> tank) {
-    tank->drainWater(hydrawise(weather));
+    tank->drainWater(countDose(weather));
 }
 
-int Irrigation::hydrawise(shared_ptr<Weather> weather) {
-    double threeDaysRain = 0;
-    vector<double> threeDaysRainVec =  weather->getNDaysRain(3);
-    for (double i : threeDaysRainVec) {
-        threeDaysRain += i;
+int Irrigation::countDose(shared_ptr<Weather> weather) {
+    double thirty = ((standardDose*area)/100)*30;
+    if (weather->getTemperature() < 15) {
+        return (int)(standardDose*area-thirty);
     }
-    if (weather->getTemperature() > 3 && weather->getNDaysRain(1)[0] < 3 && threeDaysRain < 13) {
-        double thirty = ((standardDose*area)/100)*30;
-        if (weather->getTemperature() < 15) {
-            return (int)(standardDose*area-thirty);
-        }
-        else if (weather->getTemperature() > 30) {
-            return (int)(standardDose*area+thirty);
-        }
-        else {
-            return (int)(standardDose*area);
-        }
+    else if (weather->getTemperature() > 30) {
+        return (int)(standardDose*area+thirty);
     }
-    return 0;
+    else {
+        return (int)(standardDose*area);
+    }
+}
+
+bool Irrigation::isIrrigationDay(shared_ptr<Weather> weather) {
+    if (irrigationCounter != 1 and irrigationCounter != 3 and irrigationCounter != 5 and irrigationCounter != 7) {
+        return false;
+    }
+    else {
+        double threeDaysRain = 0;
+        vector<double> threeDaysRainVec =  weather->getNDaysRain(3);
+        for (double i : threeDaysRainVec) {
+            threeDaysRain += i;
+        }
+        return weather->getTemperature() > 3 && weather->getNDaysRain(1)[0] < 3 && threeDaysRain < 13;
+    }
 }
 
 Irrigation::Irrigation(int area, int dosePerDay) {
@@ -42,8 +48,4 @@ void Irrigation::increaseCounter() {
     else {
         irrigationCounter++;
     }
-}
-
-int Irrigation::getIrrigationCounter() {
-    return irrigationCounter;
 }

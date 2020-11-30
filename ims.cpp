@@ -31,19 +31,20 @@ int main(int argc, char** argv) {
      * NE: ANO
      */
 
+    int supply = 0;
     while (weather->nextDay()) {
+        supply = Stats::waterSupply;
         roofs[0]->waterOutlet(weather, tank);
         cout << "DEN: " << weather->getDay() <<endl;
         cout << "DEST: " << weather->getRain() << endl;
         cout << "TEPLOTA: " <<weather->getTemperature() << endl;
         cout<<"VODA V NADRZI: " << tank->getWaterLevel()<<endl;
         cout << endl;
-        if (sprinkler->getIrrigationCounter() == 1 or sprinkler->getIrrigationCounter() == 3 or
-            sprinkler->getIrrigationCounter() == 5 or sprinkler->getIrrigationCounter() == 7) {
+        if (sprinkler->isIrrigationDay(weather)) {
             cout << "ZAVLAZUJI?: " << "ANO" << endl;
             sprinkler->irrigate(weather, tank);
             cout << "VODA V NADRZI PO ZAVLAZE: " << tank->getWaterLevel() << endl;
-            cout << "DOPOSUD DOPOSTENO: " << Stats::waterSupply << endl;
+            cout << "DOPUSTENO: " << Stats::waterSupply - supply << endl;
         }
         else {
             cout << "ZAVLAZUJI?: " << "NE" << endl;
@@ -51,7 +52,7 @@ int main(int argc, char** argv) {
         sprinkler->increaseCounter();
         cout << "-----------" << endl;
     }
-    cout << "MNOZSTVI DOCERPAVANE VODY: " << Stats::waterSupply << endl;
+    cout << "MNOZSTVI DOCERPAVANE VODY CELKEM: " << Stats::waterSupply << endl;
     return 0;
 }
 

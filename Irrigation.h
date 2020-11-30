@@ -14,13 +14,13 @@ class Irrigation {
         explicit Irrigation(int gardenArea, int dosePerDay);
         void irrigate(shared_ptr<Weather> weather, shared_ptr<Tank> tank);
         void increaseCounter();
-        int getIrrigationCounter();
+        bool isIrrigationDay(shared_ptr<Weather> weather);
 
     private:
         int area;
         int irrigationCounter;
         double standardDose;
-        int hydrawise(shared_ptr<Weather> weather);
+        int countDose(shared_ptr<Weather> weather);
 
 };
 
