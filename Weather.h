@@ -18,15 +18,13 @@ class Weather {
         double temperature;
         vector<double> rains;
         ifstream inFile;
-        static Weather* instance;
-        Weather(char* fileName);
     public:
+        Weather(char* fileName);
         double getTemperature();
         double getRain();
         vector<double> getNDaysRain(int n);
         bool nextDay();
         int getDay();
-        static Weather* getInstance(char* const fileName = nullptr);
 
 };
 

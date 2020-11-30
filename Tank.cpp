@@ -4,29 +4,6 @@
 
 #include "Tank.h"
 
-Tank* Tank::instance = nullptr;
-
-/**
- * Metoda, která slouží k přistupování k Tank. Pokud instance dane tridy jeste nebyla vytvorena, vytvori ji. Tato trida tedy vstupuje jako jedinacek.
- * @return vrací instanci tridy Tank
- */
-
-
-Tank* Tank::getInstance(int capacity) {
-    if (instance == nullptr) {
-        instance = new Tank(capacity);
-    }
-    return instance;
-}
-
-Tank* Tank::getInstance() {
-    if (instance == nullptr) {
-        cerr << "[CHYBA] Nadrz nema nastavenou maximalni kapacitu." << endl;
-        exit(1);
-    }
-    return instance;
-}
-
 /**
  * Konstruktor tridy Tank.
  * @param capacity maximalni kapacita akumulacni nadrze

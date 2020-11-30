@@ -4,26 +4,11 @@
 
 #include "Weather.h"
 
-Weather* Weather::instance = nullptr;
-
-Weather * Weather::getInstance(char *const fileName) {
-    if (instance == nullptr) {
-        instance = new Weather(fileName);
-    }
-    return instance;
-}
-
 Weather::Weather(char *fileName) {
-    if (fileName != nullptr) {
-        inFile.open(fileName, ios::in);
-        temperature = 0.0;
-        if (!inFile) {
-            cerr << "[CHYBA] Nelze otevrit soubor s nazvem " << "\"" << fileName << "\"" << endl;
-            exit(1);
-        }
-    }
-    else {
-        cerr << "[CHYBA] Neni nastaven soubor pro cteni dat pocasi." << endl;
+    inFile.open(fileName, ios::in);
+    temperature = 0.0;
+    if (!inFile) {
+        cerr << "[CHYBA] Nelze otevrit soubor s nazvem " << "\"" << fileName << "\"" << endl;
         exit(1);
     }
 }
@@ -61,8 +46,8 @@ vector<double> Weather::getNDaysRain(int n) {
         return newVect;
     }
     else {
-        vector<double>::const_iterator first = rains.begin() + (rains.size() - n);
-        vector<double>::const_iterator last = rains.end();
+        auto first = rains.begin() + (rains.size() - n);
+        auto last = rains.end();
         vector<double> newVect(first, last);
         return newVect;
     }

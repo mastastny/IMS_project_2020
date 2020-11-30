@@ -4,17 +4,56 @@
 #include "Weather.h"
 #include "Roof.h"
 #include "string"
-#include <sstream>
+#include "Irrigation.h"
+#include <vector>
 using namespace std;
 
-/**
- * Funkce, ktera se stara o zpracovani argumentu programu.
- * @param argc pocet argumentu programu
- * @param argv argumenty programu
- */
+vector<shared_ptr<Roof>> roofs;
+shared_ptr<Weather> weather;
+shared_ptr<Irrigation> sprinkler;
 
 vector<string> split(string myStr, string delimiter);
+void parseArguments(int argc, char** argv);
 
+int main(int argc, char** argv) {
+
+    parseArguments(argc, argv);
+    auto tank = make_shared<Tank>(5000);
+
+    /*
+     * Kalendar zavlazovani (4X TYDNE, 1 DAVKA = 5MM):
+     * PO: ANO
+     * UT: NE
+     * ST: ANO
+     * CT: NE
+     * PA: ANO
+     * SO: NE
+     * NE: ANO
+     */
+
+    while (weather->nextDay()) {
+        roofs[0]->waterOutlet(weather, tank);
+        cout << "DEN: " << weather->getDay() <<endl;
+        cout << "DEST: " << weather->getRain() << endl;
+        cout << "TEPLOTA: " <<weather->getTemperature() << endl;
+        cout<<"VODA V NADRZI: " << tank->getWaterLevel()<<endl;
+        cout << endl;
+        if (sprinkler->getIrrigationCounter() == 1 or sprinkler->getIrrigationCounter() == 3 or
+            sprinkler->getIrrigationCounter() == 5 or sprinkler->getIrrigationCounter() == 7) {
+            cout << "ZAVLAZUJI?: " << "ANO" << endl;
+            sprinkler->irrigate(weather, tank);
+            cout << "VODA V NADRZI PO ZAVLAZE: " << tank->getWaterLevel() << endl;
+            cout << "DOPOSUD DOPOSTENO: " << Stats::waterSupply << endl;
+        }
+        else {
+            cout << "ZAVLAZUJI?: " << "NE" << endl;
+        }
+        sprinkler->increaseCounter();
+        cout << "-----------" << endl;
+    }
+    cout << "MNOZSTVI DOCERPAVANE VODY: " << Stats::waterSupply << endl;
+    return 0;
+}
 
 void parseArguments(int argc, char** argv) {
     int c;
@@ -29,57 +68,28 @@ void parseArguments(int argc, char** argv) {
                 parsedParam = split(param, ":");
                 int area = stoi(parsedParam[0]);
                 float coefficient = stof(parsedParam[1]);
-                Roof(area, coefficient);
-                Roof(51, 5.4);
+                auto r = make_shared<Roof>(area, coefficient);
+                roofs.push_back(r);
                 break;
             }
             case 'g':
                 param = optarg;
+                sprinkler = make_shared<Irrigation>(stoi(param), 5);
                 break;
             case 't':
                 param = optarg;
                 break;
             case 'f': {
                 param = optarg;
-                Weather::getInstance(param);
+                weather = make_shared<Weather>(param);
                 break;
             }
             case '?':
-                cerr << "[ERROR] Unknown option: " << (char)optopt << endl;
+                cerr << "[CHYBA] Neznamy argument: " << (char)optopt << endl;
                 exit(1);
             default:
                 abort ();
         }
-}
-
-int main(int argc, char** argv) {
-
-    parseArguments(argc, argv);
-    Tank* tank = Tank::getInstance(5000);
-    Weather* weather = Weather::getInstance();
-    Roof roof = Roof::getAllRoofs()[0];
-
-
-    cout << "jsem v main" << endl;
-
-
-    while (weather->nextDay()) {
-        roof.waterOutlet();
-
-        cout << "DEN: " << weather->getDay() <<endl;
-        cout << "DEST: " << weather->getRain() << endl;
-        cout << weather->getTemperature() << endl;
-        cout << weather->getNDaysRain(2)[0] << ", " << weather->getNDaysRain(2)[1] << endl;
-        cout<<"voda v nadrzi: " << tank->getWaterLevel()<<endl;
-        cout << "-----------" << endl;
-    }
-
-    /* CTENI ZE SOUBORU - TEST */
-
-    /* NADRZ - ZKOUSKA INITU, NAPUSTENI NADRZE A PREPADU VODY + VYPIS STATS */
-
-
-    return 0;
 }
 
 vector<string> split(string myStr, string delimiter) {

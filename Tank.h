@@ -12,15 +12,12 @@ using namespace std;
 
 class Tank {
     public:
+        Tank(int capacity);
         void fill(int amount);
         int getWaterLevel();
         int getMaxCapacity();
-        static Tank* getInstance(int capacity);
-        static Tank* getInstance();
         void drainWater(int amount);
     private:
-        Tank(int capacity);
-        static Tank* instance;
         int waterLevel;
         int maxCapacity;
         bool isTankOverfull();

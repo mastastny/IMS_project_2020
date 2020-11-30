@@ -11,15 +11,11 @@
 using namespace std;
 
 class Roof {
-    static vector<Roof> roofs;
-    private:
+    public:
         int area = 666;
         float coef = 777;
-
-    public:
         Roof(int area, float coefficient);
-        static vector<Roof> getAllRoofs();
-        void waterOutlet();
+        void waterOutlet(shared_ptr<Weather> weather, shared_ptr<Tank> tank);
 };
 
 
