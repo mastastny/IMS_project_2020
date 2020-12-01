@@ -11,20 +11,24 @@ using namespace std;
 #ifndef IMS_PROJECT_2020_WEATHER_H
 #define IMS_PROJECT_2020_WEATHER_H
 
+enum weekDay {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday};
+#define NUMBER_OF_DAYS_PER_WEEK 7
 
 class Weather {
     private:
         int day;
         double temperature;
         vector<double> rains;
-        ifstream inFile;
+        ifstream rainInFile;
+        ifstream tempInFile;
+        weekDay today;
     public:
-        Weather(char* fileName);
+        Weather(string fileName, string tempFileName);
         double getTemperature();
         double getRain();
         vector<double> getNDaysRain(int n);
         bool nextDay();
-        int getDay();
+        weekDay getDay();
 
 };
 

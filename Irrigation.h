@@ -4,6 +4,7 @@
 
 #include "Tank.h"
 #include "Weather.h"
+#include <memory>
 
 #ifndef IMS_PROJECT_2020_IRRIGATION_H
 #define IMS_PROJECT_2020_IRRIGATION_H
@@ -18,9 +19,9 @@ class Irrigation {
 
     private:
         int area;
-        int irrigationCounter;
         double standardDose;
         int countDose(shared_ptr<Weather> weather);
+        double totalRain(vector<double> rains);
 
 };
 

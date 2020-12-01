@@ -6,6 +6,7 @@
 #define IMS_PROJECT_2020_ROOF_H
 
 #include <vector>
+#include <memory>
 #include "Weather.h"
 #include "Tank.h"
 using namespace std;

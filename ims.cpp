@@ -6,6 +6,8 @@
 #include "string"
 #include "Irrigation.h"
 #include <vector>
+#include <memory>
+#include "split.h"
 using namespace std;
 
 vector<shared_ptr<Roof>> roofs;
@@ -13,7 +15,7 @@ shared_ptr<Weather> weather;
 shared_ptr<Irrigation> sprinkler;
 shared_ptr<Tank> tank;
 
-vector<string> split(string myStr, string delimiter);
+//vector<string> split(string myStr, string delimiter);
 void parseArguments(int argc, char** argv);
 
 int main(int argc, char** argv) {
@@ -49,7 +51,6 @@ int main(int argc, char** argv) {
         else {
             cout << "ZAVLAZUJI?: " << "NE" << endl;
         }
-        sprinkler->increaseCounter();
         cout << "-----------" << endl;
     }
     cout << "MNOZSTVI DOCERPAVANE VODY CELKEM: " << Stats::waterSupply << endl;
@@ -87,7 +88,8 @@ void parseArguments(int argc, char** argv) {
                 break;
             case 'f': {
                 param = optarg;
-                weather = make_shared<Weather>(param);
+                parsedParam = split(param, ":");
+                weather = make_shared<Weather>(parsedParam[0], parsedParam[1]);
                 break;
             }
             case '?':
@@ -98,13 +100,6 @@ void parseArguments(int argc, char** argv) {
         }
 }
 
-vector<string> split(string myStr, string delimiter) {
-    size_t delimiterPosition;
-    size_t end = 0;
-    vector<string> temp;
 
-    delimiterPosition = myStr.find_first_of(delimiter);
-    temp.push_back(myStr.substr(0, delimiterPosition));
-    temp.push_back(myStr.substr(delimiterPosition+1, myStr.size()-1));
-    return temp;
-}
+
+
