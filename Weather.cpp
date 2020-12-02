@@ -5,6 +5,8 @@
 #include "Weather.h"
 #include "split.h"
 
+# define TESTING
+
 Weather::Weather(string rainFileName, string tempFileName) {
     today = Monday;
     day = 1;
@@ -63,6 +65,11 @@ bool Weather::nextDay() {
         exit(1);
     }
 
+#ifdef TESTING
+    cout << "DEN: " << this->getDay() <<endl;
+    cout << "DEST: " << this->getRain() << endl;
+    cout << "TEPLOTA: " <<this->getTemperature() << endl;
+#endif
     //set another day
     today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);
     day++;
@@ -77,8 +84,12 @@ double Weather::getRain() {
     return rains.back();
 }
 
-weekDay Weather::getDay() {
+weekDay Weather::getDayOfTheWeek() {
     return today;
+}
+
+int Weather::getDay() {
+    return day;
 }
 
 vector<double> Weather::getNDaysRain(int n) {

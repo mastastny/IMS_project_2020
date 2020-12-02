@@ -28,7 +28,8 @@ class Weather {
         double getRain();
         vector<double> getNDaysRain(int n);
         bool nextDay();
-        weekDay getDay();
+        int getDay();
+        weekDay getDayOfTheWeek();
 
 };
 

@@ -4,6 +4,7 @@
 
 #include "Tank.h"
 
+#define TEST
 /**
  * Konstruktor tridy Tank.
  * @param capacity maximalni kapacita akumulacni nadrze
@@ -40,6 +41,9 @@ int Tank::getMaxCapacity() {
 void Tank::dropWater(int amount) {
     Stats::droppedWater += amount;
     waterLevel = maxCapacity;
+#ifdef TEST
+    cout<<"prepad vody: " << amount<<endl;
+#endif
 }
 
 /**
@@ -49,9 +53,13 @@ void Tank::dropWater(int amount) {
 
 void Tank::fill(int amount) {
     waterLevel += amount;
+#ifdef TEST
+    cout<<"do nadrze nateklo: " << amount  <<endl;
+#endif
     if (isTankOverfull()) {
         dropWater(waterLevel - maxCapacity);
     }
+
 }
 
 /**

@@ -5,13 +5,22 @@
 #include "Irrigation.h"
 
 void Irrigation::irrigate(shared_ptr<Weather> weather, shared_ptr<Tank> tank) {
+#ifdef TESTING
+int supply = Stats::waterSupply;
+cout <<"\t" << "ZAVLAZOVANI "<< endl;
+#endif
+
     if(isIrrigationDay(weather)) {
         int waterConsumption = countDose(weather);
         tank->drainWater(waterConsumption);
+
 #ifdef TESTING
-cout << "Mnozsti vody na zalevani: " << waterConsumption << endl;
+cout <<"\t"<< "Mnozsti vody na zalevani: " << waterConsumption << endl;
+cout <<"\t" << "VODA V NADRZI PO ZAVLAZE: " << tank->getWaterLevel() << endl;
+cout <<"\t" << "DOPUSTENO: " << Stats::waterSupply - supply << endl;
 #endif
     }
+
 }
 
 int Irrigation::countDose(shared_ptr<Weather> weather) {
@@ -55,7 +64,7 @@ int Irrigation::countDose(shared_ptr<Weather> weather) {
 }
 
 bool Irrigation::isIrrigationDay(shared_ptr<Weather> weather) {
-    weekDay today = weather->getDay();
+    weekDay today = weather->getDayOfTheWeek();
     if (today == Monday or
         today == Wednesday or
         today == Friday or

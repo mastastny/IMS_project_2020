@@ -15,7 +15,6 @@ shared_ptr<Weather> weather;
 shared_ptr<Irrigation> sprinkler;
 shared_ptr<Tank> tank;
 
-//vector<string> split(string myStr, string delimiter);
 void parseArguments(int argc, char** argv);
 
 int main(int argc, char** argv) {
@@ -33,27 +32,15 @@ int main(int argc, char** argv) {
      * NE: ANO
      */
 
-    int supply = 0;
+
     while (weather->nextDay()) {
-        supply = Stats::waterSupply;
         roofs[0]->waterOutlet(weather, tank);
-        cout << "DEN: " << weather->getDay() <<endl;
-        cout << "DEST: " << weather->getRain() << endl;
-        cout << "TEPLOTA: " <<weather->getTemperature() << endl;
-        cout<<"VODA V NADRZI: " << tank->getWaterLevel()<<endl;
-        cout << endl;
-        if (sprinkler->isIrrigationDay(weather)) {
-            cout << "ZAVLAZUJI?: " << "ANO" << endl;
-            sprinkler->irrigate(weather, tank);
-            cout << "VODA V NADRZI PO ZAVLAZE: " << tank->getWaterLevel() << endl;
-            cout << "DOPUSTENO: " << Stats::waterSupply - supply << endl;
-        }
-        else {
-            cout << "ZAVLAZUJI?: " << "NE" << endl;
-        }
+        roofs[1]->waterOutlet(weather, tank);
+        sprinkler->irrigate(weather,tank);
         cout << "-----------" << endl;
     }
-    cout << "MNOZSTVI DOCERPAVANE VODY CELKEM: " << Stats::waterSupply << endl;
+
+    Stats::generateStats();
     return 0;
 }
 
@@ -62,7 +49,7 @@ void parseArguments(int argc, char** argv) {
     char* param;
     vector<string> parsedParam;
 
-    if (argc != 9) {
+    if (argc < 9) {
         cerr << "[CHYBA] Nektery z argumentu neni zadan." << "\n" << "Spusteni: ./ims -r <plocha_strechy>:<koeficient> -g <plocha_zahrady> -t <objem_nadrze> -f <nazev_souboru_s_pocasim>" << endl;
         exit(1);
     }
@@ -74,7 +61,8 @@ void parseArguments(int argc, char** argv) {
                 parsedParam = split(param, ":");
                 int area = stoi(parsedParam[0]);
                 float coefficient = stof(parsedParam[1]);
-                auto r = make_shared<Roof>(area, coefficient);
+
+                auto r = make_shared<Roof>(area, coefficient,parsedParam[2]);
                 roofs.push_back(r);
                 break;
             }

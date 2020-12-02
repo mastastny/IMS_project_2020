@@ -12,10 +12,12 @@
 using namespace std;
 
 class Roof {
+    private:
+        string id;
     public:
         int area = 666;
         float coef = 777;
-        Roof(int area, float coefficient);
+        Roof(int area, float coefficient, string id);
         void waterOutlet(shared_ptr<Weather> weather, shared_ptr<Tank> tank);
 };
 
