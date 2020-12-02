@@ -4,6 +4,7 @@
 
 #include "Tank.h"
 #include "Weather.h"
+#include "Stats.h"
 #include <memory>
 
 #ifndef IMS_PROJECT_2020_IRRIGATION_H

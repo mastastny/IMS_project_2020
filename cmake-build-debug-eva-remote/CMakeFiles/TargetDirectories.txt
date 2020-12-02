@@ -1,0 +1,3 @@
+/home/users/xk/xkincm02/IMS2020/cmake-build-debug-eva-remote/CMakeFiles/rebuild_cache.dir
+/home/users/xk/xkincm02/IMS2020/cmake-build-debug-eva-remote/CMakeFiles/edit_cache.dir
+/home/users/xk/xkincm02/IMS2020/cmake-build-debug-eva-remote/CMakeFiles/IMS_project_2020.dir

@@ -68,7 +68,7 @@ bool Weather::nextDay() {
 #ifdef TESTING
     cout << "DEN: " << this->getDay() <<endl;
     cout << "DEST: " << this->getRain() << endl;
-    cout << "TEPLOTA: " <<this->getTemperature() << endl;
+    cout << "TEPLOTA: " << this->getTemperature() << endl;
 #endif
     //set another day
     today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);

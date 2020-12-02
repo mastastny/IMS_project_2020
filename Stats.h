@@ -13,7 +13,15 @@ class Stats {
         Stats();
         static int droppedWater;
         static int waterSupply;
+        static int trappedWater;
+        static int totalWaterConsumpt;
+        static int totalRain;
+        static int dinTankVolume;
+        static int enTankVolume;
+        static void din(int roofArea, double coeficient, double hydraulicFilterEff);
+        static void en(int roofArea, double coeficient, double hydraulicFilterEff);
         static void generateStats();
+
 };
 
 
