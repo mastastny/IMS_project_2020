@@ -43,8 +43,6 @@ int main(int argc, char** argv) {
     }
 
     Stats::generateStats();
-    cout << "Prumerna spotrebovana za rok: " << (Stats::trappedWater + Stats::waterSupply)/29 << endl;
-    cout << "TotalWaterConsump: " << (Stats::totalWaterConsumpt)/29 << endl;
     return 0;
 }
 

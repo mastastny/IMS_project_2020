@@ -66,7 +66,7 @@ int Irrigation::countDose(shared_ptr<Weather> weather) {
 
 bool Irrigation::isIrrigationDay(shared_ptr<Weather> weather) {
     weekDay today = weather->getDayOfTheWeek();
-    if (today == Monday or
+    if (today == Tuesday or
         today == Wednesday or
         today == Friday or
         today == Sunday) {

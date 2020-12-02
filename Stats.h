@@ -13,7 +13,8 @@ class Stats {
         Stats();
         static int droppedWater;
         static int waterSupply;
-        static int trappedWater;
+        static int roofWater;
+        static int containedWater;
         static int totalWaterConsumpt;
         static int totalRain;
         static int dinTankVolume;

@@ -52,14 +52,16 @@ void Tank::dropWater(int amount) {
  */
 
 void Tank::fill(int amount) {
+    int waterToDrop = 0;
     waterLevel += amount;
 #ifdef TEST
     cout<<"do nadrze nateklo: " << amount  <<endl;
 #endif
     if (isTankOverfull()) {
-        dropWater(waterLevel - maxCapacity);
+        waterToDrop = waterLevel - maxCapacity;
+        dropWater(waterToDrop);
     }
-
+    Stats::containedWater += (amount - waterToDrop);
 }
 
 /**
