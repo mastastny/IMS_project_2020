@@ -10,8 +10,12 @@ Stats::Stats() = default;
  * Staticky atribut tridy Stats, ktery reprezentuje mnozstvi vody vypustene do kanalu z jimky.
  */
 int Stats::droppedWater = 0;
-
 int Stats::waterSupply = 0;
+int Stats::trappedWater = 0;
+int Stats::totalWaterConsumpt = 0;
+int Stats::dinTankVolume = 0;
+int Stats::enTankVolume = 0;
+int Stats::totalRain = 0;
 
 /**
  * Vypise na standardni vystup zachycene statistiky.
@@ -19,5 +23,21 @@ int Stats::waterSupply = 0;
 void Stats::generateStats() {
     cout << "Prepad vody za rok [dm3]: " << droppedWater << endl;
     cout << "Mnozstvi docerpane vody za rok [dm3]: " << waterSupply << endl;
-
 }
+
+void Stats::en(int roofArea, double coeficient, double hydraulicFilterEff) {
+    int annualPrecInflow = roofArea * coeficient * totalRain/29 * hydraulicFilterEff;
+    int annualWaterConsump = totalWaterConsumpt/29;
+    int dayWaterConsump = annualWaterConsump/184;
+    enTankVolume = dayWaterConsump * 21;
+}
+
+void Stats::din(int roofArea, double coeficient, double hydraulicFilterEff) {
+    int annualPrecInflow = roofArea * coeficient * totalRain/29 * hydraulicFilterEff;
+    int annualWaterConsump = totalWaterConsumpt/29;
+    dinTankVolume = min(annualPrecInflow, annualWaterConsump) * 0.114; //TODO
+}
+
+
+
+

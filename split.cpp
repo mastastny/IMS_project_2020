@@ -23,7 +23,7 @@ string preprocessFloat(string number){
     return number;
 }
 
-vector<string>  split(string myStr,  string delimeter){
+vector<string> split(string myStr, string delimeter){
     size_t substrStart = 0;
     size_t substrEnd = 0;
     size_t res;

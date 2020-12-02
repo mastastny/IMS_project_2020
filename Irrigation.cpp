@@ -13,6 +13,7 @@ cout <<"\t" << "ZAVLAZOVANI "<< endl;
     if(isIrrigationDay(weather)) {
         int waterConsumption = countDose(weather);
         tank->drainWater(waterConsumption);
+        Stats::totalWaterConsumpt += waterConsumption;
 
 #ifdef TESTING
 cout <<"\t"<< "Mnozsti vody na zalevani: " << waterConsumption << endl;

@@ -1,0 +1,30 @@
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: /tmp/tmp.Wo8j2rku/cmake-build-debug-eva-remote/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/bin/gmake/ cmTC_7db92/fast && No such file or directory
+Generator: execution of make failed. Make command was: /usr/local/bin/gmake/ cmTC_7db92/fast && 
+
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /tmp/tmp.Wo8j2rku/cmake-build-debug-eva-remote/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/bin/gmake/ cmTC_7da3f/fast && No such file or directory
+Generator: execution of make failed. Make command was: /usr/local/bin/gmake/ cmTC_7da3f/fast && 
+
+
+Detecting C compiler ABI info failed to compile with the following output:
+Change Dir: /tmp/tmp.Wo8j2rku/cmake-build-debug-eva-remote/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/bin/gmake/ cmTC_50524/fast && No such file or directory
+Generator: execution of make failed. Make command was: /usr/local/bin/gmake/ cmTC_50524/fast && 
+
+
+
+Determining if the C compiler works failed with the following output:
+Change Dir: /tmp/tmp.Wo8j2rku/cmake-build-debug-eva-remote/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/local/bin/gmake/ cmTC_e65e1/fast && No such file or directory
+Generator: execution of make failed. Make command was: /usr/local/bin/gmake/ cmTC_e65e1/fast && 
+
+

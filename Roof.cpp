@@ -18,6 +18,7 @@ void Roof::waterOutlet(shared_ptr<Weather> weather, shared_ptr<Tank> tank) {
     int waterAmount = int(rain*(area)*(coef));
     if(waterAmount > 0) {
         tank->fill(waterAmount);
+        Stats::trappedWater += waterAmount;
     }
 #ifdef TEST
     if(waterAmount > 0) {

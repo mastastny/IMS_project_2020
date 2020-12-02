@@ -9,6 +9,7 @@
 #include <memory>
 #include "Weather.h"
 #include "Tank.h"
+#include "Stats.h"
 using namespace std;
 
 class Roof {
