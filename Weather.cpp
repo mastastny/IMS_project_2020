@@ -7,9 +7,10 @@
 
 # define TESTING
 
-Weather::Weather(string rainFileName, string tempFileName) {
+Weather::Weather(string rainFileName, string tempFileName, set<int> monthsToRead) {
     today = Monday;
     day = 1;
+    months = monthsToRead;
     rainInFile.open(rainFileName, ios::in);
 
     if (!rainInFile) {
@@ -28,52 +29,48 @@ Weather::Weather(string rainFileName, string tempFileName) {
 bool Weather::nextDay() {
     int year1, month1, day1 ;
     int year2, month2, day2 ;
-    string line;
+    string tempLine, rainLine;
     vector<string> tmp;
     string tmpString;
 //year1 >> month1 >> day1 >> input_temperature
-    if (tempInFile >> line)
-    {
-        tmp = split(line, ";");
-        year1 = stoi(tmp[0]);
-        month1 = stoi(tmp[1]);
-        day1 = stoi(tmp[2]);
-        tmpString = tmp[3];
-        tmpString = preprocessFloat(tmpString);
+
+    while(tempInFile >> tempLine and rainInFile >> rainLine ) {
+
+            tmp = split(tempLine, ";");
+            year1 = stoi(tmp[0]);
+            month1 = stoi(tmp[1]);
+            day1 = stoi(tmp[2]);
+            tmpString = tmp[3];
+            tmpString = preprocessFloat(tmpString);
+
+            tmp = split(rainLine, ";");
+            year2 = stoi(tmp[0]);
+            month2 = stoi(tmp[1]);
+            day2 = stoi(tmp[2]);
+            tmpString = tmp[3];
+            tmpString = preprocessFloat(tmpString);
+
+        if (year1 != year2 or month1 != month2 or day1 != day2) {
+            cerr << "Vstupni soubory nejsou synchronizovany, jednotlive radky neodpovidaji stejnym dnum" << endl;
+            exit(1);
+        }
+
         temperature = stof(tmpString);
-    }
-    else {
-        return false;
-    }
-
-    if (rainInFile >> line)
-    {
-        tmp = split(line, ";");
-        year2 = stoi(tmp[0]);
-        month2 = stoi(tmp[1]);
-        day2 = stoi(tmp[2]);
-        tmpString = tmp[3];
-        tmpString = preprocessFloat(tmpString);
         rains.push_back(stof(tmpString));
-    }
-    else {
-        return false;
-    }
 
-    if(year1 != year2 or month1 != month2 or day1 != day2){
-        cerr<< "Vstupni soubory nejsou synchronizovany, jednotlive radky neodpovidaji stejnym dnum"<<endl;
-        exit(1);
-    }
-
+        if(months.find(month1) != months.end()){
 #ifdef TESTING
-    cout << "DEN: " << this->getDay() <<endl;
-    cout << "DEST: " << this->getRain() << endl;
-    cout << "TEPLOTA: " <<this->getTemperature() << endl;
+            cout << "DEN: " << this->getDay() <<endl;
+            cout << "DEST: " << this->getRain() << endl;
+            cout << "TEPLOTA: " <<this->getTemperature() << endl;
 #endif
-    //set another day
-    today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);
-    day++;
-    return true;
+            //set another day
+            today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);
+            day++;
+            return true;
+        }
+    }
+    return false;
 }
 
 double Weather::getTemperature() {

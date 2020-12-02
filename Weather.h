@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
+#include <set>
 using namespace std;
 
 #ifndef IMS_PROJECT_2020_WEATHER_H
@@ -22,8 +23,9 @@ class Weather {
         ifstream rainInFile;
         ifstream tempInFile;
         weekDay today;
+        set<int> months;
     public:
-        Weather(string fileName, string tempFileName);
+        Weather(string rainFile, string tempFile, set<int> monthsToRead);
         double getTemperature();
         double getRain();
         vector<double> getNDaysRain(int n);
@@ -32,6 +34,5 @@ class Weather {
         weekDay getDayOfTheWeek();
 
 };
-
 
 #endif //IMS_PROJECT_2020_WEATHER_H
