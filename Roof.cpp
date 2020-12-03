@@ -4,7 +4,7 @@
 
 #include "Roof.h"
 
-#define TEST
+//#define TEST
 
 Roof::Roof(int area, float coefficient, string id) {
     this->area = area;

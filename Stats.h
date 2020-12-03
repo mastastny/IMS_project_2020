@@ -17,6 +17,7 @@ class Stats {
         static int containedWater;
         static int totalWaterConsumpt;
         static int totalRain;
+        static double rainTotalInYear;
         static int dinTankVolume;
         static int enTankVolume;
         static void din(int roofArea, double coeficient, double hydraulicFilterEff);

@@ -17,6 +17,7 @@ int Stats::dinTankVolume = 0;
 int Stats::enTankVolume = 0;
 int Stats::totalRain = 0;
 int Stats::containedWater = 0;
+double Stats::rainTotalInYear = 0;
 
 /**
  * Vypise na standardni vystup zachycene statistiky.
@@ -26,6 +27,7 @@ void Stats::generateStats() {
     cout << "TotalWaterConsump: " << (Stats::totalWaterConsumpt)/29 << endl;//todo
     cout << "Celkové množství zadržené vody: " << Stats::containedWater << endl;
     cout << "Celkové množství přepadlé vody: " << Stats::droppedWater << endl;
+    cout << "Celkove srazky za rok: " << Stats::rainTotalInYear << endl;
 }
 
 void Stats::en(int roofArea, double coeficient, double hydraulicFilterEff) {

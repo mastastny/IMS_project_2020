@@ -4,7 +4,7 @@
 
 #include "Tank.h"
 
-#define TEST
+//#define TEST
 /**
  * Konstruktor tridy Tank.
  * @param capacity maximalni kapacita akumulacni nadrze

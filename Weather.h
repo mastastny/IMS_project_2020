@@ -7,6 +7,7 @@
 #include <fstream>
 #include <vector>
 #include <set>
+#include "Stats.h"
 using namespace std;
 
 #ifndef IMS_PROJECT_2020_WEATHER_H

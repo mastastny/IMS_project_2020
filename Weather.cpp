@@ -5,7 +5,7 @@
 #include "Weather.h"
 #include "split.h"
 
-# define TESTING
+//# define TESTING
 
 Weather::Weather(string rainFileName, string tempFileName, set<int> monthsToRead) {
     today = Monday;
@@ -32,6 +32,7 @@ bool Weather::nextDay() {
     string tempLine, rainLine;
     vector<string> tmp;
     string tmpString;
+    string rainString;
 //year1 >> month1 >> day1 >> input_temperature
 
     while(tempInFile >> tempLine and rainInFile >> rainLine ) {
@@ -47,16 +48,17 @@ bool Weather::nextDay() {
             year2 = stoi(tmp[0]);
             month2 = stoi(tmp[1]);
             day2 = stoi(tmp[2]);
-            tmpString = tmp[3];
-            tmpString = preprocessFloat(tmpString);
+            rainString = tmp[3];
+            rainString = preprocessFloat(rainString);
 
         if (year1 != year2 or month1 != month2 or day1 != day2) {
             cerr << "Vstupni soubory nejsou synchronizovany, jednotlive radky neodpovidaji stejnym dnum" << endl;
             exit(1);
         }
-
         temperature = stof(tmpString);
-        rains.push_back(stof(tmpString));
+        rains.push_back(stof(rainString));
+        cout << "DEN " << day << ": " << "srazky: " << stof(rainString) << endl;
+        Stats::rainTotalInYear += stof(rainString);
 
         if(months.find(month1) != months.end()){
 #ifdef TESTING

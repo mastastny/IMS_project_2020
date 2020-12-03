@@ -1,7 +1,7 @@
 //
 // Created by Michael Kinc on 28/11/2020.
 //
-#define TESTING
+//#define TESTING
 #include "Irrigation.h"
 
 void Irrigation::irrigate(shared_ptr<Weather> weather, shared_ptr<Tank> tank) {
