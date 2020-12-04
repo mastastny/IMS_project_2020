@@ -3,26 +3,47 @@
 //
 
 #include <iostream>
+#include <vector>
+#include <set>
 using namespace std;
 
 #ifndef IMS_PROJECT_2020_STATS_H
 #define IMS_PROJECT_2020_STATS_H
+#define DAYS_PER_YEAR 365
 
 class Stats {
     public:
         Stats();
-        static int droppedWater;
-        static int waterSupply;
+        static int roofArea;
+        static float roofCoef;
+        static int observedDays;
+        static int totalDroppedWater;
+        static int totalWaterSupply;
         static int roofWater;
-        static int containedWater;
-        static int totalWaterConsumpt;
-        static int totalRain;
-        static double rainTotalInYear;
+        static int totalContainedWater;
+        static int totalWaterUsed;
+        static double totalRain;
         static int dinTankVolume;
         static int enTankVolume;
-        static void din(int roofArea, double coeficient, double hydraulicFilterEff);
-        static void en(int roofArea, double coeficient, double hydraulicFilterEff);
+        static void din(int roofArea, float coeficient, double hydraulicFilterEff);
+        static void en(int roofArea, float coeficient, double hydraulicFilterEff);
         static void generateStats();
+        struct yearStats {
+            int year = -1;
+            int droppedWater = 0; //prepad vody
+            int waterSupply = 0; //dopustena voda
+            int containedWater = 0; //zachycena voda
+            double rain = 0; //srazkovy uhrn za rok (v mm)
+            int waterUsed = 0; //vyzalivana voda
+        };
+        static vector<yearStats> years;
+        static void newYear(int year);
+        static void containedWater(int amount);
+        static void droppedWater(int amount);
+        static void waterSupply(int amount);
+        static void setMonths(set<int> months);
+        static void usedWater(int amount);
+        static void incrementRain(double amount);
 
 };
 

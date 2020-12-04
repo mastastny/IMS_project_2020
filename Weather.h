@@ -28,7 +28,7 @@ class Weather {
         set<int> months;
         set<int> years;
         bool yearRestriction;
-        int prevYear = NOTSET;
+        int prevYear;
 
     public:
         Weather(string rainFile, string tempFile, set<int> monthsToRead);

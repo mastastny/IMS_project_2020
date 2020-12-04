@@ -24,7 +24,7 @@ cout <<"\t" << "ZAVLAZOVANI "<< endl;
         tank->prefill(maxWaterNeeded);
         int waterConsumption = countDose(weather);
         tank->drainWater(waterConsumption);
-        Stats::totalWaterConsumpt += waterConsumption;
+        Stats::usedWater(waterConsumption);
 
 #ifdef TESTING
 cout <<"\t"<< "Mnozsti vody na zalevani: " << waterConsumption << endl;

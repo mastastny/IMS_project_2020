@@ -10,6 +10,7 @@
 
 
 Weather::Weather(string rainFileName, string tempFileName, set<int> monthsToRead) {
+    prevYear = NOTSET;
     today = Monday;
     day = 0;
     yearRestriction = false;
@@ -68,19 +69,22 @@ bool Weather::nextDay() {
 
             if(prevYear == NOTSET){
                 prevYear = year1;
+                Stats::newYear(year1);
             }
             else{
-                cout<<"ahoj"<<endl;
+                if (prevYear != year1) {
+                    prevYear = year1;
+                    Stats::newYear(year1);
+                }
+
             }
-
-
 
             //set another day
             today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);
             day++;
             temperature = stof(tempString);
             rains.push_back(stof(rainString));
-            Stats::rainTotalInYear += stof(rainString);
+            Stats::incrementRain(stof(rainString));
 #ifdef TESTING
             cout << "DEN: " << this->getDay() <<endl;
             cout << "DEST: " << this->getRain() << endl;

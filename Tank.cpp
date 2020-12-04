@@ -39,7 +39,7 @@ int Tank::getMaxCapacity() {
  */
 
 void Tank::dropWater(int amount) {
-    Stats::droppedWater += amount;
+    Stats::droppedWater(amount);
     waterLevel = maxCapacity;
 #ifdef TEST
     cout<<"prepad vody: " << amount<<endl;
@@ -61,7 +61,7 @@ void Tank::fill(int amount) {
         waterToDrop = waterLevel - maxCapacity;
         dropWater(waterToDrop);
     }
-    Stats::containedWater += (amount - waterToDrop);
+    Stats::containedWater(amount - waterToDrop);
 }
 
 /**

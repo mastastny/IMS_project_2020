@@ -7,8 +7,10 @@
 //#define TEST
 
 Roof::Roof(int area, float coefficient, string id) {
+    Stats::roofArea = area;
     this->area = area;
     coef = coefficient;
+    Stats::roofCoef = coefficient;
     this->id = id;
 }
 

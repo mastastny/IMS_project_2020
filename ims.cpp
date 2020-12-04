@@ -9,6 +9,7 @@
 #include <memory>
 #include "split.h"
 #include <set>
+#include "Stats.h"
 using namespace std;
 
 //#define TEST
@@ -76,6 +77,7 @@ fileStream.open(configFile);
                 months.insert(stoi(lines[lineIdx][i]));
             }
             monthsAreSet = true;
+            Stats::setMonths(months);
         }
         else if(lines[lineIdx][0] =="rain"){
                 rainFile = lines[lineIdx][1];
