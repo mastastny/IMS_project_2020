@@ -38,8 +38,9 @@ void Stats::en(int roofArea, double coeficient, double hydraulicFilterEff) {
 }
 
 void Stats::din(int roofArea, double coeficient, double hydraulicFilterEff) {
-    int annualPrecInflow = roofArea * coeficient * totalRain/29 * hydraulicFilterEff;
-    int annualWaterConsump = totalWaterConsumpt/29;
+                                                    //prumerny rocni srazkovy uhrn v mm
+    int annualPrecInflow = roofArea * coeficient * totalRain/29 * hydraulicFilterEff;//0.95
+    int annualWaterConsump = totalWaterConsumpt/29;// deleno rokama
     dinTankVolume = min(annualPrecInflow, annualWaterConsump) * 0.114; //TODO
 }
 

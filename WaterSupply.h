@@ -7,11 +7,14 @@
 
 #include "Stats.h"
 #include "Tank.h"
+#include <memory>
+using namespace std;
+
 
 class WaterSupply {
     public:
         WaterSupply();
-        static void getWater(int amount);
+        static void getWater( int amount);
 };
 
 

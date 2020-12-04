@@ -17,6 +17,7 @@ class Tank {
         int getWaterLevel();
         int getMaxCapacity();
         void drainWater(int amount);
+        void prefill(int volumeOfWater);
     private:
         int waterLevel;
         int maxCapacity;

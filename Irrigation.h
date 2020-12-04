@@ -12,7 +12,7 @@
 
 
 class Irrigation {
-    public:
+public:
         explicit Irrigation(int gardenArea, int dosePerDay);
         void irrigate(shared_ptr<Weather> weather, shared_ptr<Tank> tank);
         void increaseCounter();
@@ -21,9 +21,10 @@ class Irrigation {
     private:
         int area;
         double standardDose;
+        int maxWaterNeeded;
         int countDose(shared_ptr<Weather> weather);
         double totalRain(vector<double> rains);
-
+        double roundUptoHundreds(double number);
 };
 
 

@@ -15,6 +15,7 @@ using namespace std;
 
 enum weekDay {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday};
 #define NUMBER_OF_DAYS_PER_WEEK 7
+#define NOTSET -1
 
 class Weather {
     private:
@@ -25,6 +26,10 @@ class Weather {
         ifstream tempInFile;
         weekDay today;
         set<int> months;
+        set<int> years;
+        bool yearRestriction;
+        int prevYear = NOTSET;
+
     public:
         Weather(string rainFile, string tempFile, set<int> monthsToRead);
         double getTemperature();
@@ -33,6 +38,7 @@ class Weather {
         bool nextDay();
         int getDay();
         weekDay getDayOfTheWeek();
+        void setYearRestriction(set<int> years);
 
 };
 

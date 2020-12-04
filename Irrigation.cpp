@@ -4,6 +4,16 @@
 //#define TESTING
 #include "Irrigation.h"
 
+/*
+ * Kalendar zavlazovani (4X TYDNE, 1 DAVKA = 5MM):
+ * PO: NE
+ * UT: ANO
+ * ST: ANO
+ * CT: NE
+ * PA: ANO
+ * SO: NE
+ * NE: ANO
+ */
 void Irrigation::irrigate(shared_ptr<Weather> weather, shared_ptr<Tank> tank) {
 #ifdef TESTING
 int supply = Stats::waterSupply;
@@ -11,6 +21,7 @@ cout <<"\t" << "ZAVLAZOVANI "<< endl;
 #endif
 
     if(isIrrigationDay(weather)) {
+        tank->prefill(maxWaterNeeded);
         int waterConsumption = countDose(weather);
         tank->drainWater(waterConsumption);
         Stats::totalWaterConsumpt += waterConsumption;
@@ -45,13 +56,17 @@ int Irrigation::countDose(shared_ptr<Weather> weather) {
     cout<<"teplota > 30";
     #endif
   }
-  if(totalRain(weather->getNDaysRain(1)) > 3.0){
+  double a = totalRain(weather->getNDaysRain(2));
+  double b = totalRain(weather->getNDaysRain(1));
+  if( (a-b) > 3.0){
       dose = 0;
     #ifdef TESTING
     cout<<"srazky za poslednich 24 hod > 3 ";
     #endif
   }
-  if(totalRain(weather->getNDaysRain(3)) > 13.0){
+   a = totalRain(weather->getNDaysRain(4));
+   b = totalRain(weather->getNDaysRain(1));
+  if((a-b) > 13.0){
       dose = 0;
     #ifdef TESTING
     cout<<"srazky za posledni tri dny > 13 ";
@@ -80,6 +95,7 @@ bool Irrigation::isIrrigationDay(shared_ptr<Weather> weather) {
 Irrigation::Irrigation(int area, int dosePerDay) {
     this->area = area;
     standardDose = dosePerDay;
+    maxWaterNeeded = (int)roundUptoHundreds(area * dosePerDay * 1.3);
 }
 
 
@@ -89,4 +105,9 @@ double Irrigation::totalRain(vector<double> rains){
         totRain += i;
     }
     return totRain;
+}
+
+double Irrigation::roundUptoHundreds(double number){
+        int intNum = number;
+        return intNum + 100 - (intNum % 100);
 }

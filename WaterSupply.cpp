@@ -3,8 +3,9 @@
 //
 
 #include "WaterSupply.h"
+extern shared_ptr<Tank> tank;
 
-void WaterSupply::getWater(int amount) {
+void WaterSupply::getWater( int amount) {
     Stats::waterSupply += amount;
 }
 

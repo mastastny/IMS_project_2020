@@ -81,8 +81,14 @@ void Tank::drainWater(int amount) {
     if (waterLevel >= amount) {
         waterLevel -= amount;
     }
-    else {
-        WaterSupply::getWater(amount - waterLevel);
-        waterLevel = 0;
+    else{
+        cerr<<"cerpani vetsiho mnozstvi vody z nadrze nez kolik obsahuje."<<endl;
+        exit(0);
     }
+}
+
+void Tank::prefill(int volumeOfWater){
+    int amountToGet = ( (volumeOfWater - waterLevel) < 0) ? 0 : volumeOfWater - waterLevel;
+    WaterSupply::getWater(amountToGet);
+    waterLevel += amountToGet;
 }

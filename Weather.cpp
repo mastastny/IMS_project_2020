@@ -7,9 +7,12 @@
 
 //# define TESTING
 
+
+
 Weather::Weather(string rainFileName, string tempFileName, set<int> monthsToRead) {
     today = Monday;
-    day = 1;
+    day = 0;
+    yearRestriction = false;
     months = monthsToRead;
     rainInFile.open(rainFileName, ios::in);
 
@@ -27,11 +30,12 @@ Weather::Weather(string rainFileName, string tempFileName, set<int> monthsToRead
 }
 
 bool Weather::nextDay() {
+
     int year1, month1, day1 ;
     int year2, month2, day2 ;
     string tempLine, rainLine;
     vector<string> tmp;
-    string tmpString;
+    string tempString;
     string rainString;
 //year1 >> month1 >> day1 >> input_temperature
 
@@ -41,8 +45,8 @@ bool Weather::nextDay() {
             year1 = stoi(tmp[0]);
             month1 = stoi(tmp[1]);
             day1 = stoi(tmp[2]);
-            tmpString = tmp[3];
-            tmpString = preprocessFloat(tmpString);
+        tempString = tmp[3];
+        tempString = preprocessFloat(tempString);
 
             tmp = split(rainLine, ";");
             year2 = stoi(tmp[0]);
@@ -55,20 +59,33 @@ bool Weather::nextDay() {
             cerr << "Vstupni soubory nejsou synchronizovany, jednotlive radky neodpovidaji stejnym dnum" << endl;
             exit(1);
         }
-        temperature = stof(tmpString);
-        rains.push_back(stof(rainString));
-        cout << "DEN " << day << ": " << "srazky: " << stof(rainString) << endl;
-        Stats::rainTotalInYear += stof(rainString);
 
+        if(yearRestriction){
+            if(years.find(year1) == years.end())
+                continue;
+        }
         if(months.find(month1) != months.end()){
+
+            if(prevYear == NOTSET){
+                prevYear = year1;
+            }
+            else{
+                cout<<"ahoj"<<endl;
+            }
+
+
+
+            //set another day
+            today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);
+            day++;
+            temperature = stof(tempString);
+            rains.push_back(stof(rainString));
+            Stats::rainTotalInYear += stof(rainString);
 #ifdef TESTING
             cout << "DEN: " << this->getDay() <<endl;
             cout << "DEST: " << this->getRain() << endl;
             cout << "TEPLOTA: " <<this->getTemperature() << endl;
 #endif
-            //set another day
-            today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);
-            day++;
             return true;
         }
     }
@@ -102,4 +119,9 @@ vector<double> Weather::getNDaysRain(int n) {
         vector<double> newVect(first, last);
         return newVect;
     }
+}
+
+void Weather::setYearRestriction(set<int> yearsToUse){
+    yearRestriction = true;
+    years = yearsToUse;
 }

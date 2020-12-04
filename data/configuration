@@ -1,4 +1,15 @@
+
+#zdrojove soubory
 rain:../data/Srazky_Libus.csv
 temperatures:../data/Max_teplota_Libus.csv
-roof:100:0.8:strecha_domu
+
+
+#omezeni na to ktere dny simulovat
 months:5:6:7:8:9:10
+yearsRestriction:2002
+
+
+#prvky modelu
+roof:150:0.75:strecha_domu
+garden:960
+tank:7000

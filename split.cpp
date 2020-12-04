@@ -4,7 +4,9 @@
 
 # include "split.h"
 
+
 string preprocessFloat(string number){
+    replace( number.begin(), number.end(), ',', '.'); // replace all 'x' to 'y'
     if(number == ""){
         number = "0";
     }
