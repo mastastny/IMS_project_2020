@@ -44,7 +44,6 @@ class Stats {
         static void setMonths(set<int> months);
         static void usedWater(int amount);
         static void incrementRain(double amount);
-
 };
 
 

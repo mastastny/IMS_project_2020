@@ -20,6 +20,7 @@ int supply = Stats::waterSupply;
 cout <<"\t" << "ZAVLAZOVANI "<< endl;
 #endif
 
+
     if(isIrrigationDay(weather)) {
         tank->prefill(maxWaterNeeded);
         int waterConsumption = countDose(weather);
@@ -36,7 +37,7 @@ cout <<"\t" << "DOPUSTENO: " << Stats::waterSupply - supply << endl;
 }
 
 int Irrigation::countDose(shared_ptr<Weather> weather) {
-  double dose = standardDose;
+      double dose = standardDose;
 
   if(weather->getTemperature() < 3.0){
       dose = 0;

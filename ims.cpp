@@ -27,6 +27,7 @@ int main(int argc, char** argv) {
 
     parseArguments(argc, argv);
     while (weather->nextDay()) {
+
         sprinkler->irrigate(weather,tank);
         roofs[0]->waterOutlet(weather, tank);
         #ifdef TEST

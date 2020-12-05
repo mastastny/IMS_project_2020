@@ -3,6 +3,7 @@
 //
 
 #include "Stats.h"
+#include <iomanip>
 
 Stats::Stats() = default;
 
@@ -26,25 +27,61 @@ float Stats::roofCoef = 0.0;
  * Vypise na standardni vystup zachycene statistiky.
  */
 void Stats::generateStats() {
-    cout << "Mnozstvi docerpane vody za rok [dm3]: " << totalWaterSupply << endl;
-    //cout << "TotalWaterConsump: " << (Stats::totalWaterConsumpt)/29 << endl;//todo
+#define YEARLEN 9
+    cout  <<left<<setw(YEARLEN)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<right<< "+"<<endl;
+    cout<<"|  "<<left<<setw(YEARLEN -3 )<<setfill(' ')<<"ROK";
+    cout<<"|  "<<left<<setw(20)<<setfill(' ')<<"ZACHYCENA VODA";
+    cout<<"|  "<<left<<setw(20)<<setfill(' ')<<"PREPAD VODY";
+    cout<<"|  "<<left<<setw(20)<<setfill(' ')<<"DOPUSTENA VODA";
+    cout<<"|  "<<left<<setw(20)<<setfill(' ')<<"VYUZITA VODA";
+    cout<<"|  "<<left<<setw(20)<<setfill(' ')<<"SRAZEK CELKEM"<<"|"<<endl;
+    cout  <<left<<setw(YEARLEN)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<left<<setw(23)<<setfill('-')<< "+";
+    cout  <<right<< "+"<<endl;
+    for (int i = 0; i < years.size(); i++) {
+        //cout << "|\t" << years[i].year << "\t\t|\t" << years[i].containedWater << "\t\t\t|\t" << years[i].droppedWater << "\t\t|\t" << years[i].waterSupply << "\t\t\t|\t" << years[i].waterUsed << "\t\t\t|\t" << years[i].rain << "\t\t|"<<endl;
+        cout<<"|  "<<left<<setw(YEARLEN-3)<<setfill(' ')<<years[i].year;
+        cout<<"|  "<<left<<setw(20)<<setfill(' ')<<years[i].containedWater;
+        cout<<"|  "<<left<<setw(20)<<setfill(' ')<<years[i].droppedWater;
+        cout<<"|  "<<left<<setw(20)<<setfill(' ')<<years[i].waterSupply;
+        cout<<"|  "<<left<<setw(20)<<setfill(' ')<<years[i].waterUsed;
+        cout<<"|  "<<left<<setw(20)<<setfill(' ')<<years[i].rain<<"|"<<endl;
+        cout  <<left<<setw(YEARLEN)<<setfill('-')<< "+";
+        cout  <<left<<setw(23)<<setfill('-')<< "+";
+        cout  <<left<<setw(23)<<setfill('-')<< "+";
+        cout  <<left<<setw(23)<<setfill('-')<< "+";
+        cout  <<left<<setw(23)<<setfill('-')<< "+";
+        cout  <<left<<setw(23)<<setfill('-')<< "+";
+        cout  <<right<< "+"<<endl;
+
+
+    }
+
+    cout<<endl;
+    cout << "Celkové množství dočerpané vody [dm3]: " << totalWaterSupply << endl;
     cout << "Celkové množství zadržené vody: " << Stats::totalContainedWater << endl;
     cout << "Celkové množství přepadlé vody: " << Stats::totalDroppedWater << endl;
-    cout << "observedDays: " << Stats::observedDays << endl;
-    cout << "Srazek celkem: " << Stats::totalRain << endl;
+    cout << "Celkové množství srážek: " << Stats::totalRain << endl;
+    cout<<endl;
+    cout << "Průměrné roční zavlažování: " << Stats::totalWaterUsed/years.size() << endl;
+    cout << "Průměrné roční srážky: " << Stats::totalRain/years.size() << endl;
     Stats::din(Stats::roofArea, Stats::roofCoef, 0.95);
     Stats::en(Stats::roofArea, Stats::roofCoef, 0.95);
+    cout<<endl;
     cout << "DIN: " << Stats::dinTankVolume << endl;
     cout << "EN: " << Stats::enTankVolume << endl;
-    //cout << "Celkove srazky za rok: " << Stats::rainTotalInYear << endl;
 
-    cout << "+------------------------------------------------+" << endl;
-    cout << "|\tROK\t|\tZACHYCENA VODA\t|\tPREPAD VODY\t|\tDOPUSTENA VODA\t|\tVYUZITA VODA\t|\tSRAZEK CELKEM\t|" << endl;
-    cout << "+------------------------------------------------+" << endl;
-    for (int i = 0; i < years.size(); i++) {
-        cout << "|\t" << years[i].year << "\t|\t" << years[i].containedWater << "\t|\t" << years[i].droppedWater << "\t|\t" << years[i].waterSupply << "\t|\t" << years[i].waterUsed << "\t|\t" << years[i].rain << endl;
-        cout << "+------------------------------------------------+" << endl;
-    }
+    //cout << "Celkove srazky za rok: " << Stats::rainTotalInYear << endl;
 }
 
 void Stats::newYear(int year) {
@@ -61,10 +98,10 @@ void Stats::en(int roofArea, float coeficient, double hydraulicFilterEff) {
 }
 
 void Stats::din(int roofArea, float coeficient, double hydraulicFilterEff) {
-                                                    //prumerny rocni srazkovy uhrn v mm
+    float rainlessPeriodCoeff = 21.0/(float)observedDays;                                                //prumerny rocni srazkovy uhrn v mm
     int annualPrecInflow = roofArea * coeficient * totalRain/years.size() * hydraulicFilterEff;//0.95
     int annualWaterConsump = totalWaterUsed/years.size();// deleno rokama
-    int res = min(annualPrecInflow, annualWaterConsump) * ((float)observedDays / (float)DAYS_PER_YEAR);
+    int res = (float)min(annualPrecInflow, annualWaterConsump) * rainlessPeriodCoeff;
     dinTankVolume = res;
 }
 
@@ -106,8 +143,3 @@ void Stats::setMonths(set<int> months) {
         }
     }
 }
-
-
-
-
-

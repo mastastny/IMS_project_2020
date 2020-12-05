@@ -61,6 +61,8 @@ bool Weather::nextDay() {
             exit(1);
         }
 
+        rains.push_back(stof(rainString));
+
         if(yearRestriction){
             if(years.find(year1) == years.end())
                 continue;
@@ -75,6 +77,7 @@ bool Weather::nextDay() {
                 if (prevYear != year1) {
                     prevYear = year1;
                     Stats::newYear(year1);
+                    today = Monday;
                 }
 
             }
@@ -83,7 +86,6 @@ bool Weather::nextDay() {
             today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);
             day++;
             temperature = stof(tempString);
-            rains.push_back(stof(rainString));
             Stats::incrementRain(stof(rainString));
 #ifdef TESTING
             cout << "DEN: " << this->getDay() <<endl;
