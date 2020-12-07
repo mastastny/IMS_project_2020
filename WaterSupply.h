@@ -1,7 +1,3 @@
-//
-// Created by Michael Kinc on 28/11/2020.
-//
-
 #ifndef IMS_PROJECT_2020_WATERSUPPLY_H
 #define IMS_PROJECT_2020_WATERSUPPLY_H
 
@@ -10,6 +6,9 @@
 #include <memory>
 using namespace std;
 
+/**
+ * Třída reperentující vodovodní řad.
+ */
 
 class WaterSupply {
     public:

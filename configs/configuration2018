@@ -1,5 +1,5 @@
-rain:../data/srazky_zahrada_2018.csv
-temperatures:../data/teplota_zahrada_2018.csv
+rain:data/srazky_zahrada_2018.csv
+temperatures:data/teplota_zahrada_2018.csv
 roof:100:0.75:strecha_domu
 
 #model parameters

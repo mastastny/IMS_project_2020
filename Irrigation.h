@@ -1,7 +1,3 @@
-//
-// Created by Michael Kinc on 28/11/2020.
-//
-
 #include "Tank.h"
 #include "Weather.h"
 #include "Stats.h"
@@ -10,6 +6,9 @@
 #ifndef IMS_PROJECT_2020_IRRIGATION_H
 #define IMS_PROJECT_2020_IRRIGATION_H
 
+/**
+ * Třída, která se stará o zavlažování trávníku.
+ */
 
 class Irrigation {
 public:

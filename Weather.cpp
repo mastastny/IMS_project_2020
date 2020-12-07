@@ -1,13 +1,14 @@
-//
-// Created by Michael Kinc on 28/11/2020.
-//
-
 #include "Weather.h"
 #include "split.h"
 
 //# define TESTING
 
-
+/**
+ * Konstruktor třídy Weather. Otevírá soubory, ze kterých se čte srážkový úhrn a teplota
+ * @param rainFileName jméno souboru se srážkami
+ * @param tempFileName jméno souboru s teplotami
+ * @param monthsToRead měsíce, na které se zaměřujeme
+ */
 
 Weather::Weather(string rainFileName, string tempFileName, set<int> monthsToRead) {
     prevYear = NOTSET;
@@ -30,6 +31,11 @@ Weather::Weather(string rainFileName, string tempFileName, set<int> monthsToRead
     }
 }
 
+/**
+ * Metoda, který zajišťuje iteraci po jednom dni a zpracovává data ze vstupních souborů.
+ * @return vrací úspěch operace
+ */
+
 bool Weather::nextDay() {
 
     int year1, month1, day1 ;
@@ -42,19 +48,19 @@ bool Weather::nextDay() {
 
     while(tempInFile >> tempLine and rainInFile >> rainLine ) {
 
-            tmp = split(tempLine, ";");
-            year1 = stoi(tmp[0]);
-            month1 = stoi(tmp[1]);
-            day1 = stoi(tmp[2]);
+        tmp = split(tempLine, ";");
+        year1 = stoi(tmp[0]);
+        month1 = stoi(tmp[1]);
+        day1 = stoi(tmp[2]);
         tempString = tmp[3];
         tempString = preprocessFloat(tempString);
 
-            tmp = split(rainLine, ";");
-            year2 = stoi(tmp[0]);
-            month2 = stoi(tmp[1]);
-            day2 = stoi(tmp[2]);
-            rainString = tmp[3];
-            rainString = preprocessFloat(rainString);
+        tmp = split(rainLine, ";");
+        year2 = stoi(tmp[0]);
+        month2 = stoi(tmp[1]);
+        day2 = stoi(tmp[2]);
+        rainString = tmp[3];
+        rainString = preprocessFloat(rainString);
 
         if (year1 != year2 or month1 != month2 or day1 != day2) {
             cerr << "Vstupni soubory nejsou synchronizovany, jednotlive radky neodpovidaji stejnym dnum" << endl;
@@ -85,34 +91,61 @@ bool Weather::nextDay() {
             //set another day
             today = static_cast<weekDay>((static_cast<int>(today) + 1) % NUMBER_OF_DAYS_PER_WEEK);
             day++;
+            Stats::newDay();
             temperature = stof(tempString);
             Stats::incrementRain(stof(rainString));
-#ifdef TESTING
-            cout << "DEN: " << this->getDay() <<endl;
-            cout << "DEST: " << this->getRain() << endl;
-            cout << "TEPLOTA: " <<this->getTemperature() << endl;
-#endif
+            #ifdef TESTING
+                cout << "DEN: " << this->getDay() <<endl;
+                cout << "DEST: " << this->getRain() << endl;
+                cout << "TEPLOTA: " <<this->getTemperature() << endl;
+            #endif
             return true;
         }
     }
     return false;
 }
 
+/**
+ * Metoda, která vrací aktuální teplotu
+ * @return teplota
+ */
+
 double Weather::getTemperature() {
     return temperature;
 }
+
+/**
+ * Metoda, která vrací aktuální srážkový úhrn.
+ * @return srážky v mm
+ */
 
 double Weather::getRain() {
     return rains.back();
 }
 
+/**
+ * Metoda, která vrací, co je dnes za den
+ * @return den
+ */
+
 weekDay Weather::getDayOfTheWeek() {
     return today;
 }
 
+/**
+ * Metoda, která vrací, kolikátý den simulace právě probíhá.
+ * @return den
+ */
+
 int Weather::getDay() {
     return day;
 }
+
+/**
+ * Metoda, která vrací vektor dešťů za posledních N dní.
+ * @param n počet zkoumanách dní
+ * @return vrací vektor se srážkovými úhrny
+ */
 
 vector<double> Weather::getNDaysRain(int n) {
     if (n >= rains.size()) {
@@ -126,6 +159,11 @@ vector<double> Weather::getNDaysRain(int n) {
         return newVect;
     }
 }
+
+/**
+ * Metoda, která nastaví, na jaké dny se v simulaci omezujeme.
+ * @param yearsToUse množina roků
+ */
 
 void Weather::setYearRestriction(set<int> yearsToUse){
     yearRestriction = true;

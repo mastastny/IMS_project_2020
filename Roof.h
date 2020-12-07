@@ -12,6 +12,10 @@
 #include "Stats.h"
 using namespace std;
 
+/**
+ * Třida reprezentující střechu.
+ */
+
 class Roof {
     private:
         string id;

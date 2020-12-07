@@ -1,7 +1,3 @@
-//
-// Created by marek on 01.12.20.
-//
-
 #ifndef IMS_PROJECT_2020_SPLIT_H
 #define IMS_PROJECT_2020_SPLIT_H
 
@@ -11,16 +7,20 @@
 
 using namespace std;
 
+/**
+ * Metoda, ktera upravi hodnoty s plovouci desetinnou carkou, ktere precte ze souboru, tak, aby byly pouzitelne s beznymi funkcemi jyzka C++.
+ * @param number cislo ve formatu retezce
+ * @return upravene cislo ve formatu retezce
+ */
+
 string preprocessFloat(string number);
 
 /**
- * Finds substrings ending with the delimeter and stores them into vector.
- * Substring ends at the end of the delimeter.
- * End of the message without delimeter is not stored.
- * @param message string in which the substring will be searched
- * @param subStrings vector in which substrings will be stored
- * @param delimeter
+ * Metoda, ktera rozdeli retezec podle zadaneho delimiteru a ulozi tyto casti do vektoru
+ * @param myStr retezec
+ * @param delimeter rozdelovac
+ * @return vraci vektor rozdelenych casti retezce
  */
-vector<string>  split(string myStr,  string delimeter);
+vector<string> split(string myStr, string delimeter);
 
 #endif //IMS_PROJECT_2020_SPLIT_H

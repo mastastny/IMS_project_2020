@@ -41,7 +41,8 @@ int main(int argc, char** argv) {
 
 
 void Config(string configFile){
-bool rainIsSet, tempIsSet, monthsAreSet, yearsRestrictionSet= false;
+bool rainIsSet, tempIsSet, yearsRestrictionSet= false;
+bool monthsAreSet = 0;
 string rainFile, tempFile;
 set<int> months;
 set<int> years;
@@ -72,13 +73,14 @@ fileStream.open(configFile);
             auto r = make_shared<Roof>(area, coefficient,lines[lineIdx][3]);
             roofs.push_back(r);
         }
+        if (lines[lineIdx][0] == "waterPrice") {
+            Stats::priceForCubicMeter = stof(lines[lineIdx][1]);
+        }
         if(lines[lineIdx][0] == "months"){
-
             for(int i = 1; i< lines[lineIdx].size(); i++){
                 months.insert(stoi(lines[lineIdx][i]));
             }
             monthsAreSet = true;
-            Stats::setMonths(months);
         }
         else if(lines[lineIdx][0] =="rain"){
                 rainFile = lines[lineIdx][1];
@@ -126,11 +128,15 @@ void parseArguments(int argc, char** argv) {
         exit(1);
     }
 
-    while ((c = getopt (argc, argv, "c:")) != -1)
+    while ((c = getopt (argc, argv, "c:y")) != -1)
         switch (c) {
             case 'c': {
                 param = optarg;
                 Config(param);
+                break;
+            }
+            case 'y': {
+                Stats::shouldPrintYears = true;
                 break;
             }
             case '?':

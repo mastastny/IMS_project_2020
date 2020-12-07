@@ -1,7 +1,7 @@
 
 #zdrojove soubory
-rain:../data/Srazky_Libus.csv
-temperatures:../data/Max_teplota_Libus.csv
+rain:data/Srazky_Libus.csv
+temperatures:/data/Max_teplota_Libus.csv
 
 
 #omezeni na to ktere dny simulovat

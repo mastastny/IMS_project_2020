@@ -1,7 +1,3 @@
-//
-// Created by marek on 01.12.20.
-//
-
 # include "split.h"
 
 

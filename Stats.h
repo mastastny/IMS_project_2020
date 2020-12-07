@@ -1,7 +1,3 @@
-//
-// Created by Michael Kinc on 28/11/2020.
-//
-
 #include <iostream>
 #include <vector>
 #include <set>
@@ -11,9 +7,15 @@ using namespace std;
 #define IMS_PROJECT_2020_STATS_H
 #define DAYS_PER_YEAR 365
 
+/**
+ * Třída, ktera se stara o uchovávání a výpis statistik.
+ */
+
 class Stats {
     public:
         Stats();
+        static float priceForCubicMeter;
+        static bool shouldPrintYears;
         static int roofArea;
         static float roofCoef;
         static int observedDays;
@@ -28,6 +30,8 @@ class Stats {
         static void din(int roofArea, float coeficient, double hydraulicFilterEff);
         static void en(int roofArea, float coeficient, double hydraulicFilterEff);
         static void generateStats();
+        static void printYears();
+        static void money();
         struct yearStats {
             int year = -1;
             int droppedWater = 0; //prepad vody
@@ -35,6 +39,7 @@ class Stats {
             int containedWater = 0; //zachycena voda
             double rain = 0; //srazkovy uhrn za rok (v mm)
             int waterUsed = 0; //vyzalivana voda
+            int numberOfDays = 0;
         };
         static vector<yearStats> years;
         static void newYear(int year);
@@ -44,6 +49,7 @@ class Stats {
         static void setMonths(set<int> months);
         static void usedWater(int amount);
         static void incrementRain(double amount);
+        static void newDay();
 };
 
 

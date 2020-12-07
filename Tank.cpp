@@ -1,10 +1,7 @@
-//
-// Created by Michael Kinc on 28/11/2020.
-//
-
 #include "Tank.h"
 
 //#define TEST
+
 /**
  * Konstruktor tridy Tank.
  * @param capacity maximalni kapacita akumulacni nadrze
@@ -47,7 +44,7 @@ void Tank::dropWater(int amount) {
 }
 
 /**
- * Metoda, ktera naplni nadrz urcitym mnozstvim vody.
+ * Metoda, ktera naplni nadrz urcitym mnozstvim vody. Zavola funkci, ktera zjisti, zda by nadrz naplnenim nebyla preplněná.
  * @param amount mnozstvi vody
  */
 
@@ -73,6 +70,11 @@ bool Tank::isTankOverfull() {
     return waterLevel > maxCapacity;
 }
 
+/**
+ * Metoda, ktera zajistuje odcerpani vody z nadrze kvuli zavlažovaní.
+ * @param amount Množství vody
+ */
+
 void Tank::drainWater(int amount) {
     if (amount > maxCapacity) {
         cout << "Nadrz s kapacitou " << maxCapacity << " litrů není vhodná pro vase potreby zavlazovani." << endl;
@@ -82,10 +84,15 @@ void Tank::drainWater(int amount) {
         waterLevel -= amount;
     }
     else{
-        cerr<<"cerpani vetsiho mnozstvi vody z nadrze nez kolik obsahuje."<<endl;
+        cerr<<"Cerpani vetsiho mnozstvi vody z nadrze nez kolik obsahuje."<<endl;
         exit(0);
     }
 }
+
+/**
+ * Metoda, která předvyplní nádrž.
+ * @param volumeOfWater množství vody
+ */
 
 void Tank::prefill(int volumeOfWater){
     int amountToGet = ( (volumeOfWater - waterLevel) < 0) ? 0 : volumeOfWater - waterLevel;

@@ -1,7 +1,3 @@
-//
-// Created by Michael Kinc on 28/11/2020.
-//
-
 #include <string>
 #include <iostream>
 #include <fstream>
@@ -16,6 +12,10 @@ using namespace std;
 enum weekDay {Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday};
 #define NUMBER_OF_DAYS_PER_WEEK 7
 #define NOTSET -1
+
+/**
+ * Třída, ktera reprezentuje počasí. Čte data ze vstupních souborů.
+ */
 
 class Weather {
     private:

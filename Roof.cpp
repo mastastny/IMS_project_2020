@@ -6,6 +6,13 @@
 
 //#define TEST
 
+/**
+ * Konstruktor třídy Roof. Nastavuje jeji rozlohu, pritokovy koeficient a nazev
+ * @param area rozloha strechy
+ * @param coefficient pritokovy koeficient
+ * @param id nazev
+ */
+
 Roof::Roof(int area, float coefficient, string id) {
     Stats::roofArea = area;
     this->area = area;
@@ -13,6 +20,12 @@ Roof::Roof(int area, float coefficient, string id) {
     Stats::roofCoef = coefficient;
     this->id = id;
 }
+
+/**
+ * Metoda, ktera se stara o sber vody ze strechy.
+ * @param weather objekt pocasu
+ * @param tank objekt nadrze
+ */
 
 void Roof::waterOutlet(shared_ptr<Weather> weather, shared_ptr<Tank> tank) {
     double rain;
@@ -22,10 +35,9 @@ void Roof::waterOutlet(shared_ptr<Weather> weather, shared_ptr<Tank> tank) {
         tank->fill(waterAmount);
         Stats::roofWater += waterAmount;
     }
-#ifdef TEST
-    if(waterAmount > 0) {
-        cout << "střecha: " << id << " pridala do nadrze: " << waterAmount << "[dm3] vody" << endl;
-    }
-#endif
-
+    #ifdef TEST
+        if(waterAmount > 0) {
+            cout << "střecha: " << id << " pridala do nadrze: " << waterAmount << "[dm3] vody" << endl;
+        }
+    #endif
 }
