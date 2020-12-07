@@ -4,6 +4,8 @@
 
 #include "Roof.h"
 
+#define HYDRAULIC_FILTER_EFF 0.95
+
 //#define TEST
 
 /**
@@ -30,7 +32,7 @@ Roof::Roof(int area, float coefficient, string id) {
 void Roof::waterOutlet(shared_ptr<Weather> weather, shared_ptr<Tank> tank) {
     double rain;
     rain = weather->getRain();
-    int waterAmount = int(rain*(area)*(coef));
+    int waterAmount = int(rain*(area)*(coef)*(HYDRAULIC_FILTER_EFF));
     if(waterAmount > 0) {
         tank->fill(waterAmount);
         Stats::roofWater += waterAmount;

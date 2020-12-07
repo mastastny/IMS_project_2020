@@ -65,6 +65,7 @@ fileStream.open(configFile);
         }
         if (lines[lineIdx][0] == "tank") {
             tank = make_shared<Tank>(stoi(lines[lineIdx][1]));
+            Stats::tankPrice = stoi(lines[lineIdx][2]);
         }
         if (lines[lineIdx][0] == "roof") {
             int area = stoi(lines[lineIdx][1]);

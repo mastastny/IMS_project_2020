@@ -1,0 +1,9 @@
+#zdrojove soubory
+rain:data/validace_srazky.csv
+temperatures:data/validace_teplota.csv
+
+waterPrice:48.3
+roof:100:0.8:strecha_domu
+garden:460
+tank:5000:0
+

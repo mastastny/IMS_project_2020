@@ -24,6 +24,7 @@ int Stats::roofArea = 0;
 float Stats::roofCoef = 0.0;
 bool Stats::shouldPrintYears = false;
 float Stats::priceForCubicMeter = 0;
+int Stats::tankPrice = 0;
 
 /**
  * Vypise na standardni vystup hodnoty pro jednotlive roky.
@@ -75,7 +76,7 @@ void Stats::printYears() {
  */
 
 void Stats::money() {
-    cout  <<left<<setw(44)<<setfill('-')<< "+";
+    /*cout  <<left<<setw(44)<<setfill('-')<< "+";
     cout  <<left<<setw(13)<<setfill('-')<< "+";
     cout  <<right<< "+"<<endl;
     cout<<"|  "<<left<<setw(41)<<setfill(' ')<< "Prumerna rocni cena za dopusteni [Kc]: ";
@@ -92,7 +93,17 @@ void Stats::money() {
     cout<<"|  "<<left<<setw(10)<<setfill(' ')<< ((float)(totalContainedWater)*(Stats::priceForCubicMeter/1000))/years.size() << "|" << endl;
     cout  <<left<<setw(44)<<setfill('-')<< "+";
     cout  <<left<<setw(13)<<setfill('-')<< "+";
+    cout  <<right<< "+"<<endl;*/
+
+    cout  <<left<<setw(54)<<setfill('-')<< "+";
+    cout  <<left<<setw(13)<<setfill('-')<< "+";
     cout  <<right<< "+"<<endl;
+    cout<<"|  "<<left<<setw(51)<<setfill(' ')<< "Cena za uchovani jednoho m3 do nadrze [Kc]: ";
+    cout<<"|  "<<left<<setw(10)<<setfill(' ')<< ((float)Stats::tankPrice/((float)Stats::totalContainedWater))*1000 << "|" << endl;
+    cout  <<left<<setw(54)<<setfill('-')<< "+";
+    cout  <<left<<setw(13)<<setfill('-')<< "+";
+    cout  <<right<< "+"<<endl;
+
 }
 
 /**

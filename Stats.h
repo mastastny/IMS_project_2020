@@ -50,6 +50,7 @@ class Stats {
         static void usedWater(int amount);
         static void incrementRain(double amount);
         static void newDay();
+        static int tankPrice;
 };
 
 
